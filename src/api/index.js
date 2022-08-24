@@ -16,7 +16,15 @@ function fetchJobsList() {
     return axios.get(`${config.baseUrl}jobs/1.json`);
 }
 
+function fetchUser(userName) {
+    return axios.get(`${config.baseUrl}user/${userName}.json`)
+}
+
+function fetchItem(itemId) {
+    return axios.get(`${config.baseUrl}item/${itemId}.json`)
+}
+
 
 export {
-    fetchNewsList, fetchJobsList, fetchAskList
+    fetchNewsList, fetchJobsList, fetchAskList, fetchUser, fetchItem
 }

@@ -1,25 +1,32 @@
 <template>
   <div>
-    <p v-for="(item, index) in ask" :key="index">
-      <a :href="item.url">{{ item.title }}</a>
-      <small> {{ item.time_ago }} by {{ item.user }}</small>
-    </p>
+    <list-item></list-item>
+    <!-- <ul class="ask-list">
+      <li v-for="(item, index) in ask" :key="index" class="post">
+        <div>
+          <p class="ask-title">
+            <router-link :to="`/item/${item.id}`">
+              {{ item.title }}
+            </router-link>
+          </p>
+          <small class="link-text">
+            {{ item.time_ago }} by {{ item.user }}
+          </small>
+        </div>
+      </li>
+    </ul> -->
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import ListItem from '../components/ListItem.vue';
 
 export default {
-  computed: {
-    ...mapState(['ask'])
-  },
-  created() {
-    this.$store.dispatch('FETCH_ASKS')
+  components: {
+    ListItem,
   }
 }
 </script>
 
 <style>
-
 </style>
