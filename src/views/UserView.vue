@@ -1,20 +1,28 @@
 <template>
   <div>
-    <p>name : {{user.id}}</p>
-    <p>karma : {{user.karma}}</p>
-    <p>created : {{user.created}}</p>
+    <user-profile>
+      <div slot="username">{{ userInfo.id }}</div>
+      <span slot="time">{{ 'Joined ' + userInfo.created }}, </span>
+      <span slot="karma">{{ userInfo.karma }}</span>
+  </user-profile>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import UserProfile from '../components/UserProfile.vue';
+
 export default {
   computed: {
-    ...mapState(['user'])
+    userInfo() {
+      return this.$store.state.user;
+    }
   },
   created() {
     const userName = this.$route.params.id;
     this.$store.dispatch('FETCH_USER', userName)
+  },
+  components: {
+    UserProfile
   }
 }
 </script>

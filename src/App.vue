@@ -4,39 +4,69 @@
     <transition name="page">
       <router-view></router-view>
     </transition>
+    <spinner :loading="loadingStatus"></spinner>
   </div>
 </template>
 
 <script>
-import ToolBar from './components/ToolBar.vue'
+import ToolBar from './components/ToolBar.vue';
+import Spinner from './components/Spinner.vue';
+import bus from './utils/bus.js';
 
 export default {
   components: {
     ToolBar,
+    Spinner
+  },
+  data() {
+    return {
+      loadingStatus: false,
+    }
+  },
+  methods: {
+    stratSpinner() {
+      this.loadingStatus = true;
+    },
+    endSpinner() {
+      this.loadingStatus = false;
+    }
+  },
+  created() {
+    bus.$on('start:spinner', this.stratSpinner)
+    bus.$on('end:spinner', this.endSpinner)
+  },
+  beforeDestroy() {
+    bus.$off('start:spinner', this.stratSpinner)
+    bus.$off('end:spinner', this.endSpinner)
   }
 }
 </script>
 
 <style>
 body {
-  padding : 0px;
-  margin : 0px
+  padding: 0px;
+  margin: 0px
 }
-a{
-  color : #34495e;
+
+a {
+  color: #34495e;
   text-decoration: none;
 }
-a:hover{
+
+a:hover {
   color: #42b883;
   text-decoration: underline;
 }
-a.router-link-exact-active{
+
+a.router-link-exact-active {
   text-decoration: underline;
 }
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.5s ease;
 }
+
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
