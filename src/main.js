@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import { router } from './routers/index.js';
-import { store } from './store/store.js';
+import { store } from './store/index.js';
 
 
 /* import the fontawesome core */

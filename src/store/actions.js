@@ -1,13 +1,20 @@
 import { fetchList, fetchUser, fetchItem } from '../api/index.js';
 
 export default {
-    FETCH_LIST(context, pageName) {
-        fetchList(pageName)
-            .then(response => {
-                context.commit('SET_LIST', response.data)
-                return response;
-            })
-            .catch(error => console.log(error))
+    //promise api
+    // FETCH_LIST_Promise(context, pageName) {
+    //     return fetchList(pageName)
+    //         .then(response => {
+    //             context.commit('SET_LIST', response.data)
+    //             return response;
+    //         })
+    //         .catch(error => console.log(error))
+    // },
+    //async await api
+    async FETCH_LIST(context, pageName) {
+        const response = await fetchList(pageName);
+        context.commit('SET_LIST', response.data);
+        return response;
     },
     FETCH_USER(context, userName) {
         fetchUser(userName)

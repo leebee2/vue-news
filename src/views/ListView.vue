@@ -31,9 +31,9 @@
 <script>
 
 export default {
-  computed: {
-    listItem() {
-      return this.$store.state.list;
+  data() {
+    return {
+      listItem: this.$store.state.list,
     }
   }
 }
